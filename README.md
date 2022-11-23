@@ -37,15 +37,22 @@ Go into VSCode, hit Ctrl + Shift + P again to make sure you're connected to your
 Now, hit Execute Query on the LoadPostgres.sql. It should know where the files are, postgres should have permission to access them, and the server/database should be running and empty. If everything goes well, the blue ribbon at the bottom of VSCode will say localhost : whatever_you_named_your_database : postgres at the right, as well as an "Executing Query". Lots of data are being loaded, so it might take a bit. 
 
 Once it finishes, you can test if it worked by doing a query from the book and seeing if you got the same answer:
+
 SELECT zc.stab, COUNT(*) as numrows
+
 FROM Orders o JOIN
+
      ZipCensus zc
+
      ON o.zipcode = zc.zcta5 AND
-        o.totalprice > zc.mediangrossrent
+
+     o.totalprice > zc.mediangrossrent
+
 GROUP BY zc.stab
+
 ORDER BY numrows DESC
 
-Should have NY, NJ, CA at the top 
+Should have NY, NJ, CA at the top with 621, 157, and 120 respectively. I got 620 for New York though, and I have no clue what went wrong. 
 
 
 
